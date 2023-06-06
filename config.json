@@ -1,0 +1,10 @@
+{
+    "DeviceId":"qwertyuiop",
+    "AccountId":"loliva",
+    "SensorId":"asdfghjkl"
+    "HostName":"http://192.168.0.124",
+    "Port": 5000,
+    "TimeStampFormat":"{:04d}/{:02d}/{:02d} {:02d}:{:02d}:{:02d}",
+    "DirectoryNameFormat":"{:04d}{:02d}{:02d}",
+    "FileNameFormat":"{:04d}{:02d}{:02d}_{:02d}.csv"
+}

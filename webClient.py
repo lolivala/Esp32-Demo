@@ -1,6 +1,6 @@
 import urequests
 import ujson
-import objects
+from objects import *
 
 class Webclient:
     host = ""
@@ -13,17 +13,17 @@ class Webclient:
          
     def	postData(self, jsonData, route, headers):
         url = '{}:{}/{}'.format(self.host, self.port, route)
-        response = urequests.post(url, headers = headers, data =jsonReq)
+        response = urequests.post(url, headers = headers, data =jsonData)
         print(url)
 
-document = DeviceMeasurements("sdafsfsdaf","retrewrrtr")
-document.addMeasurent(Measurement("Temperature","100","C", "2023-06-06"))
-document.addMeasurent(Measurement("Humidity","55","%", "2023-06-06"))
-document.addMeasurent(Measurement("Soil Humidity","35","%", "2023-06-06"))
+#document = DeviceMeasurements("Huerto Emmanuelle","Huerto Emmanuelle")
+#document.addMeasurent(Measurement("Temperature","100","C", "2023-06-06"))
+#document.addMeasurent(Measurement("Humidity","55","%", "2023-06-06"))
+#document.addMeasurent(Measurement("Soil Humidity","35","%", "2023-06-06"))
 
-jsonData = document.getDataInJson()
+#jsonData = document.getDataInJson()
 
-apiClient = Webclient("http://192.168.0.124", 5000)
-response = apiClient.postData(jsonData,"measurements",{'content-type': 'application/json'})
+#apiClient = Webclient("http://192.168.0.124", 5000)
+#response = apiClient.postData(jsonData,"measurements",{'content-type': 'application/json'})
 
-print(response.text)
+#print(response)
