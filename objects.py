@@ -32,8 +32,8 @@ class DeviceMeasurements:
     sensorId = ""
     measurements = []
     
-    def __init__(self, measurementId, deviceId):
-        self.measurementId = measurementId
+    def __init__(self, deviceId, sensorId):
+        self.sensorId = sensorId
         self.deviceId = deviceId
         
     def addMeasurent(self, measurement):
@@ -60,10 +60,10 @@ class DeviceMeasurements:
         return ujson.dumps(mainDict)
 
 
-document = DeviceMeasurements("sdafsfsdaf","retrewrrtr")
-document.addMeasurent(Measurement("Temperature","100","C", "2023-06-06"))
-document.addMeasurent(Measurement("Humidity","55","%", "2023-06-06"))
-document.addMeasurent(Measurement("Soil Humidity","35","%", "2023-06-06"))
+#document = DeviceMeasurements("sdafsfsdaf","retrewrrtr")
+#document.addMeasurent(Measurement("Temperature","100","C", "2023-06-06"))
+#document.addMeasurent(Measurement("Humidity","55","%", "2023-06-06"))
+#document.addMeasurent(Measurement("Soil Humidity","35","%", "2023-06-06"))
 
-print(document.getDataInJson())
+#print(document.getDataInJson())
 

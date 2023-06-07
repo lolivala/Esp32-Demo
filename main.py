@@ -1,10 +1,10 @@
 import time
+import utils
 from time import sleep
 from objects import *
 from monitorService import *
 from dataAccess import *
 from webClient import *
-import utils
 
 try:
     settings = utils.getConfigSettings()
@@ -14,6 +14,8 @@ try:
     apiClient = Webclient(settings["HostName"], settings["Port"])
 
     while True:
+        document = None
+        jsonData = ""
         sleep(5)
         t = time.localtime()
         
@@ -28,6 +30,14 @@ try:
                                                tup.Humidity.measurementvalue)
         
         storage.createEntrylog(newRow,directoryname,filename)
+        
+        document = DeviceMeasurements(settings["DeviceId"],settings["SensorId"])
+        document.addMeasurent(tup.Temperature)
+        document.addMeasurent(tup.Humidity)
+        
+        jsonData = document.getDataInJson()
+
+        response = apiClient.postData(jsonData,"measurements",{'content-type': 'application/json'})
           
 except OSError as e:
     print('Failed to read sensor.')
