@@ -1,4 +1,6 @@
 {
+    "ssid":"HomeNetwork",
+    "ssidPassword":"qwerty0112358",
     "DeviceId":"qwertyuiop",
     "AccountId":"loliva",
     "SensorId":"asdfghjkl"
