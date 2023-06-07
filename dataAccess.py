@@ -26,8 +26,13 @@ class LocalStorage:
         os.chdir('sd')
         print('SD Card containst: {}'.format(os.listdir()))
 
-    def createEntrylog(self, newRow, directoryName, fileName):
+    def createEntrylog(self, timestamp, directoryName, fileName, tup):
         try:
+            newRow = '{},{:3.1f}C,{:3.1f}%'.format(timestamp,
+                                               tup.Temperature.measurementvalue,
+                                               tup.Humidity.measurementvalue)
+            
+            
             dirList = os.listdir()
             #print('dirList=',dirlist)
             print(newRow)
