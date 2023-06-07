@@ -35,10 +35,11 @@ class DeviceMeasurements:
     def __init__(self, deviceId, sensorId):
         self.sensorId = sensorId
         self.deviceId = deviceId
+        self.measurements = []
         
     def addMeasurent(self, measurement):
         self.measurements.append(measurement)
-        print("object added successfully")
+        #print("object added successfully")
 
     def getDataInJson(self):
         mainDict = {}

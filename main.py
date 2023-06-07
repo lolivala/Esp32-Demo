@@ -12,11 +12,9 @@ try:
     monitor = EnvironmentMonitor()
     storage = LocalStorage()
     apiClient = Webclient(settings["HostName"], settings["Port"])
-
+    
     while True:
-        document = None
-        jsonData = ""
-        sleep(5)
+        sleep(settings["ReadRatio"])
         t = time.localtime()
         
         timestamp = settings["TimeStampFormat"].format(t[0], t[1], t[2], t[3], t[4], t[5])
