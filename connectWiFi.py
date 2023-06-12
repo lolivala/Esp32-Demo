@@ -1,22 +1,23 @@
-import utils
+import dataUtils
 import network
 
 def connect():
-    settings = utils.getConfigSettings()
+    
+    print("Step 1")
+    settings = dataUtils.getConfigSettings()
     ssid = settings["ssid"]
     password = settings["ssidPassword"]
- 
+    
+    print("Step 2")
     station = network.WLAN(network.STA_IF)
  
-    if station.isconnected() == True:
-        print("Already connected")
-        return
- 
+    print("Step 3")
     station.active(True)
     station.connect(ssid, password)
- 
+    
+    print("Step 4")
     while station.isconnected() == False:
-        pass
- 
+      pass
+
     print("Connection successful")
     print(station.ifconfig())

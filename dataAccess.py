@@ -19,19 +19,21 @@ class LocalStorage:
     vfs = None
     
     def __init__(self):
-        print('Root directory: {}'.format(os.listdir()))
+        #print('Root directory: {}'.format(os.listdir()))
         self.vfs = os.VfsFat(self.sd)
         os.mount(self.vfs,'/sd')
-        print('Root directory: {}'.format(os.listdir()))
+        #print('Root directory: {}'.format(os.listdir()))
         os.chdir('sd')
-        print('SD Card containst: {}'.format(os.listdir()))
+        #print('SD Card containst: {}'.format(os.listdir()))
 
-    def createEntrylog(self, timestamp, directoryName, fileName, tup):
+    def createEntrylog(self, timestamp, t, tup, settings):
         try:
-            newRow = '{},{:3.1f}C,{:3.1f}%'.format(timestamp,
-                                               tup.Temperature.measurementvalue,
-                                               tup.Humidity.measurementvalue)
+            directoryName = settings["DirectoryNameFormat"].format(t[0], t[1], t[2])
+            fileName = settings["FileNameFormat"].format(t[0], t[1], t[2], t[3])
             
+            newRow = '{},{:3.1f}C,{:3.1f}%'.format(timestamp,
+                                        tup.Temperature.measurementvalue,
+                                        tup.Humidity.measurementvalue)
             
             dirList = os.listdir()
             #print('dirList=',dirlist)

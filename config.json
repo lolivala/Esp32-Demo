@@ -2,12 +2,16 @@
     "ssid":"HomeNetwork",
     "ssidPassword":"qwerty0112358",
     "DeviceId":"qwertyuiop",
-    "AccountId":"loliva",
-    "SensorId":"asdfghjkl"
-    "HostName":"http://192.168.0.124",
-    "Port": 5000,
+    "AccountId":"loliva",   
+    "APIHostName":"http://192.168.0.124",
+    "APIPort": 5000,
     "TimeStampFormat":"{:04d}/{:02d}/{:02d} {:02d}:{:02d}:{:02d}",
     "DirectoryNameFormat":"{:04d}{:02d}{:02d}",
     "FileNameFormat":"{:04d}{:02d}{:02d}_{:02d}.csv",
-    "ReadRatio": 5
+    "ReadRatio": 5,
+    "MonitorSensors": 
+    [
+        {"SensorId":"asdfghjkl", "Pins":"2", "ValueFormat":"", "HeaderName":""},
+        {"SensorId":"zxcvbnmlp", "Pins":"3", "ValueFormat":"", "HeaderName":""}
+    ]
 }
