@@ -1,18 +1,20 @@
-# This file is executed on every boot (including wake-boot from deepsleep)
-#import esp
-#esp.osdebug(None)
 #import webrepl
 #webrepl.start()
 import gc
 import esp
 import connectWiFi
+import micropython
   
 try:
   import usocket as socket
 except:
   import socket
 
-connectWiFi.connect()
+#micropython.alloc_emergency_exception_buf(100)
 
 esp.osdebug(None)
 gc.collect()
+gc.enable()
+#gc.disable()
+
+connectWiFi.connect()

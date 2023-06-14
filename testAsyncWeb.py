@@ -41,7 +41,6 @@ async def index(req):
 
     return render_template('orders.html', name=name, orders=orders)
 
-
 async def MonitorEnvironment():
     delay_ms=5000
     print("Inside Monitor method")
@@ -61,7 +60,4 @@ def start_server():
     except:
         app.shutdown()
 
-
-        
 start_server()
-

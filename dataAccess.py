@@ -1,6 +1,7 @@
-import os
 from machine import Pin, SoftSPI
 from sdcard import SDCard
+import os
+import gc
 
 #Pin assignment
 #  MISO -> GPIO 13
@@ -19,17 +20,25 @@ class LocalStorage:
     vfs = None
     
     def __init__(self):
-        #print('Root directory: {}'.format(os.listdir()))
-        self.vfs = os.VfsFat(self.sd)
-        os.mount(self.vfs,'/sd')
-        #print('Root directory: {}'.format(os.listdir()))
-        os.chdir('sd')
-        #print('SD Card containst: {}'.format(os.listdir()))
+        try:
+            #print('Root directory: {}'.format(os.listdir()))
+            self.vfs = os.VfsFat(self.sd)
+            os.mount(self.vfs,'/sd')
+            #print('Root directory: {}'.format(os.listdir()))
+            os.chdir('sd')
+            #print('SD Card containst: {}'.format(os.listdir()))
+        except OSError as e:
+            print('Error on Data Access: '+ str(e.args[0]))
+        finally:
+            gc.collect()
+            gc.threshold(gc.mem_free() // 4 + gc.mem_alloc())
+
 
     def createEntrylog(self, timestamp, t, tup, settings):
         try:
             directoryName = settings["DirectoryNameFormat"].format(t[0], t[1], t[2])
             fileName = settings["FileNameFormat"].format(t[0], t[1], t[2], t[3])
+            
             
             newRow = '{},{:3.1f}C,{:3.1f}%'.format(timestamp,
                                         tup.Temperature.measurementvalue,
@@ -58,5 +67,7 @@ class LocalStorage:
             
             os.chdir('..')
         except OSError as e:
-            print('Error on Data Access.')
-            #print('Failed to read sensor.'+ str(e.args[0]))
+            print('Error on Data Access: '+ str(e.args[0]))
+        finally:
+            gc.collect()
+            gc.threshold(gc.mem_free() // 4 + gc.mem_alloc())

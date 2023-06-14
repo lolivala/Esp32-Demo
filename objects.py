@@ -1,3 +1,4 @@
+import gc
 import ujson
 
 class Device:
@@ -39,26 +40,31 @@ class DeviceMeasurements:
         
     def addMeasurent(self, measurement):
         self.measurements.append(measurement)
-        #print("object added successfully")
 
     def getDataInJson(self):
         mainDict = {}
         arrayMes = []
-        
-        mainDict["DeviceId"] = self.deviceId 
-        mainDict["SensorId"] = self.sensorId
-        
-        for m in self.measurements:
-            dict = {}
-            dict["MeasurementName"] = m.measurementName
-            dict["Measurementvalue"] = m.measurementvalue
-            dict["UnitOfMeasure"] = m.unitOfMeasure
-            dict["DateTime"] = m.dateTime
-            arrayMes.append(dict)
-        
-        mainDict["Measurements"] = arrayMes
-
-        return ujson.dumps(mainDict)
+        try:
+            mainDict["DeviceId"] = self.deviceId 
+            mainDict["SensorId"] = self.sensorId
+            
+            for m in self.measurements:
+                dict = {}
+                dict["MeasurementName"] = m.measurementName
+                dict["Measurementvalue"] = m.measurementvalue
+                dict["UnitOfMeasure"] = m.unitOfMeasure
+                dict["DateTime"] = m.dateTime
+                arrayMes.append(dict)
+            
+            mainDict["Measurements"] = arrayMes
+            
+            #return ujson.dumps(mainDict)
+        except OSError as e:
+            print('Error on objets: '+ str(e.args[0]))
+        finally:
+            gc.collect()
+            gc.threshold(gc.mem_free() // 4 + gc.mem_alloc())
+            return ujson.dumps(mainDict)
 
 
 #document = DeviceMeasurements("sdafsfsdaf","retrewrrtr")
