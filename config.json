@@ -1,6 +1,6 @@
 {
-    "ssid":"HomeNetwork",
-    "ssidPassword":"qwerty0112358",
+    "ssid":"XXXXXX",
+    "ssidPassword":"XXXXXXX",
     "DeviceId":"qwertyuiop",
     "AccountId":"loliva",   
     "APIHostName":"http://192.168.0.124",
